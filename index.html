@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VORAX | Engineered for Dominance</title>
+    <meta name="description" content="Witness the transformation of VORAX. Precision. Power. Evolution.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Loading Screen (optional but good for UX while 210 images preload) -->
+    <div id="loader" class="loader">
+        <div class="loader-text">INITIALIZING SYSTEMS... <span id="progress">0%</span></div>
+        <div class="loader-bar-container">
+            <div id="loader-bar" class="loader-bar"></div>
+        </div>
+    </div>
+
+    <!-- The container that provides scroll height -->
+    <div class="hero-scroll-container">
+        <!-- Fixed Viewport Content -->
+        <main class="hero-content">
+            <!-- Canvas for Frame Animation -->
+            <canvas id="hero-canvas"></canvas>
+
+            <!-- Gradient Overlays for depth -->
+            <div class="overlay-gradient-top"></div>
+            <div class="overlay-gradient-bottom"></div>
+
+            <!-- UI Overlay -->
+            <div class="ui-layer">
+                
+                <header class="navbar">
+                    <div class="logo">VORAX</div>
+                </header>
+
+                <div class="hero-text">
+                    <h2 class="subtext">PRECISION. POWER. EVOLUTION.</h2>
+                    <h1 class="headline">ENGINEERED FOR DOMINANCE</h1>
+                    <button class="cta-button">
+                        <span class="cta-text">ENTER VORAX</span>
+                        <div class="cta-glow"></div>
+                    </button>
+                    <!-- Scroll indicator -->
+                    <div class="scroll-indicator">
+                        <span class="scroll-text">SYSTEM BOOT SEQUENCE [SCROLL]</span>
+                        <div class="scroll-line"></div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Extended Website Sections -->
+    <div class="content-wrapper">
+        
+        <!-- Combat System Section -->
+        <section class="game-section alternating-layout" id="combat">
+            <div class="section-image hover-depth reveal fade-left">
+                <img src="assets/vorax_combat_pose_1776447706610.png" alt="VORAX Combat System">
+            </div>
+            <div class="section-text reveal fade-right">
+                <h3 class="section-subtitle">01 // DOMINANCE</h3>
+                <h2 class="section-title">COMBAT SYSTEM</h2>
+                <p class="section-desc">Engineered for absolute superiority. The VORAX combat frame synchronizes neuromuscular reflexes with hyper-dense kinetic plating, delivering untethered lethality without sacrificing agility.</p>
+                <button class="cta-button primary-accent">
+                    <span class="cta-text">EXPLORE COMBAT</span>
+                    <div class="cta-glow"></div>
+                </button>
+            </div>
+        </section>
+
+        <!-- Armor Technology Section -->
+        <section class="game-section alternating-layout reverse" id="armor">
+            <div class="section-image hover-depth reveal fade-right">
+                <img src="assets/vorax_armor_closeup_1776447721203.png" alt="VORAX Armor Plating">
+            </div>
+            <div class="section-text reveal fade-left">
+                <h3 class="section-subtitle">02 // RESILIENCE</h3>
+                <h2 class="section-title">ARMOR TECHNOLOGY</h2>
+                <p class="section-desc">Forged in the abyss. Triple-layered carbon nanofiber weaves intertwine with reactive kinetic gel, capable of dispersing hyper-velocity impacts across the entire frame.</p>
+            </div>
+        </section>
+
+        <!-- Power Core Section -->
+        <section class="game-section centered-layout" id="core">
+            <div class="section-text align-center reveal">
+                <h3 class="section-subtitle">03 // VITALITY</h3>
+                <h2 class="section-title">NEXUS POWER CORE</h2>
+                <p class="section-desc">A self-sustaining zero-point energy reactor fuels every combat directive, offering indefinite battlefield operability and localized shielding metrics.</p>
+            </div>
+            <div class="section-image hover-depth large-image reveal">
+                <img src="assets/vorax_power_core_1776447735799.png" alt="VORAX Dark Energy Core">
+            </div>
+        </section>
+
+        <!-- Weapon System Section -->
+        <section class="game-section alternating-layout" id="weapon">
+            <div class="section-image hover-depth reveal fade-left">
+                <img src="assets/vorax_weapon_1776447751317.png" alt="VORAX Weaponry">
+            </div>
+            <div class="section-text reveal fade-right">
+                <h3 class="section-subtitle">04 // LETHALITY</h3>
+                <h2 class="section-title">WEAPONS SYSTEM</h2>
+                <p class="section-desc">Harness pinpoint devastation. The neuro-linked arsenal adapts dynamically to the threat matrix, shifting seamlessly between high-frequency pulse bursts and armor-piercing kinetic rounds.</p>
+            </div>
+        </section>
+
+        <!-- Narrative / Evolution -->
+        <section class="game-section narrative-layout" id="evolution">
+            <h2 class="narrative-text reveal">
+                "We did not build a soldier. <br>
+                <span class="highlight">We built an apex predator.</span>"
+            </h2>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="game-section final-cta reveal" id="activate">
+            <h2 class="section-title">INITIATE DEPLOYMENT</h2>
+            <button class="cta-button massive">
+                <span class="cta-text">ENTER COMBAT MODE</span>
+                <div class="cta-glow"></div>
+            </button>
+        </section>
+
+        <!-- Minimal Footer -->
+        <footer class="site-footer reveal">
+            <div class="footer-logo">VORAX</div>
+            <div class="footer-links">
+                <a href="#combat">Combat</a>
+                <a href="#armor">Armor</a>
+                <a href="#core">Core</a>
+                <a href="#weapon">Arsenal</a>
+            </div>
+            <div class="footer-copyright">&copy; 2026 VORAX INITIATIVE. All Rights Reserved.</div>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,532 @@
+/* CSS Variables & Reset */
+:root {
+    --bg-color: #030303;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.6);
+    --accent: #00f0ff; /* Subtle cyberpunk cyan accent */
+    --accent-glow: rgba(0, 240, 255, 0.4);
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    overscroll-behavior: none;
+}
+
+::selection {
+    background-color: var(--text-primary);
+    color: var(--bg-color);
+}
+
+/* Loader */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-color);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+}
+
+.loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loader-text {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+.loader-bar-container {
+    width: 250px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.loader-bar {
+    width: 0%;
+    height: 100%;
+    background: var(--text-primary);
+    transition: width 0.1s linear;
+}
+
+/* Scroll Container */
+.hero-scroll-container {
+    height: 600vh; /* Increased scroll length for smoother, slower frame progression */
+    position: relative;
+    z-index: 1;
+}
+
+/* Fixed Hero Content */
+.hero-content {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    overflow: hidden;
+}
+
+/* Canvas */
+#hero-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    /* object-fit logic handled in JS, but canvas scales automatically */
+}
+
+/* Gradients for Cinematic Lighting effect */
+.overlay-gradient-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 30vh;
+    background: linear-gradient(to bottom, var(--bg-color) 0%, transparent 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.overlay-gradient-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40vh;
+    background: linear-gradient(to top, var(--bg-color) 0%, transparent 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* UI Layer */
+.ui-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none; /* Let clicks pass through if needed */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem 4rem;
+}
+
+/* Navbar */
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: auto;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 6px;
+    color: var(--text-primary);
+}
+
+/* Main Text Area */
+.hero-text {
+    align-self: center; /* Center horizontally via flex logic if needed, but we want it bottom-centered generally */
+    text-align: center;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.subtext {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 8px;
+    color: var(--accent);
+    margin-bottom: 16px;
+    text-shadow: 0 0 10px var(--accent-glow);
+}
+
+.headline {
+    font-family: var(--font-heading);
+    font-size: 4vw; /* Responsive scale */
+    font-weight: 800;
+    letter-spacing: -2px;
+    line-height: 1.1;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+/* CTA Button */
+.cta-button {
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 16px 48px;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    overflow: hidden;
+    pointer-events: auto;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.cta-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.cta-text {
+    position: relative;
+    z-index: 2;
+}
+
+.cta-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease, opacity 0.6s ease;
+    z-index: 1;
+    opacity: 0;
+}
+
+.cta-button:active .cta-glow {
+    width: 200px;
+    height: 200px;
+    opacity: 0.2;
+    transition: 0s;
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: -15vh; /* Initial position slightly below until scrolled? Or fixed at bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0.8;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* We override the bottom positioning to place it neatly */
+.hero-text {
+    position: relative;
+    padding-bottom: 60px; /* Space for scroll indicator */
+}
+
+.scroll-indicator {
+    bottom: 0;
+}
+
+.scroll-text {
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--text-secondary) 0%, transparent 100%);
+    animation: scrollLine 2s infinite ease-in-out;
+}
+
+@keyframes scrollLine {
+    0% { transform: scaleY(0); transform-origin: top; opacity: 0; }
+    50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+    50.1% { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+    100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+}
+
+/* Extended Website Sections */
+.content-wrapper {
+    position: relative;
+    z-index: 3;
+    background-color: var(--bg-color);
+}
+
+.game-section {
+    padding: 100px 10vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    min-height: 100vh;
+}
+
+.alternating-layout {
+    flex-direction: row;
+}
+
+.alternating-layout.reverse {
+    flex-direction: row-reverse;
+}
+
+.centered-layout {
+    flex-direction: column;
+    text-align: center;
+}
+
+.narrative-layout {
+    min-height: 50vh;
+    padding: 150px 10vw;
+    text-align: center;
+}
+
+.final-cta {
+    min-height: 60vh;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* Typography Extensions */
+.section-subtitle {
+    font-family: var(--font-body);
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    line-height: 1.2;
+}
+
+.section-desc {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 500px;
+    margin-bottom: 40px;
+}
+
+.centered-layout .section-desc {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.narrative-text {
+    font-family: var(--font-heading);
+    font-size: 3.5vw;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.narrative-text .highlight {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+/* Image Containers */
+.section-image {
+    flex: 1;
+    max-width: 50%;
+    position: relative;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.section-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+    opacity: 0.9;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.section-image.large-image {
+    max-width: 80%;
+    margin-top: 40px;
+}
+
+.section-text {
+    flex: 1;
+}
+
+/* Hover Interactions */
+.hover-depth:hover {
+    transform: scale(1.02) translateY(-10px);
+}
+
+.hover-depth:hover img {
+    opacity: 1;
+    box-shadow: 0 30px 60px rgba(0, 240, 255, 0.1);
+    border-color: rgba(0, 240, 255, 0.2);
+}
+
+.cta-button.primary-accent {
+    border-color: rgba(0, 240, 255, 0.3);
+}
+
+.cta-button.primary-accent:hover {
+    border-color: var(--accent);
+    box-shadow: 0 10px 30px rgba(0, 240, 255, 0.2);
+    color: var(--accent);
+}
+
+.cta-button.massive {
+    font-size: 16px;
+    padding: 20px 60px;
+}
+
+/* Footer */
+.site-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 80px 20px 40px;
+    background: #000;
+    position: relative;
+    z-index: 3;
+}
+
+.footer-logo {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 6px;
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--text-primary);
+}
+
+.footer-copyright {
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+/* Scroll Reveal Animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal.fade-left {
+    transform: translateX(-50px);
+}
+.reveal.fade-right {
+    transform: translateX(50px);
+}
+.reveal.fade-left.active, .reveal.fade-right.active {
+    transform: translateX(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .headline {
+        font-size: 8vw;
+    }
+    .ui-layer {
+        padding: 1.5rem;
+    }
+    .game-section {
+        flex-direction: column;
+        padding: 80px 5vw;
+        gap: 40px;
+    }
+    .alternating-layout.reverse {
+        flex-direction: column;
+    }
+    .section-image {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+    .section-image.large-image {
+        max-width: 100%;
+    }
+    .section-title {
+        font-size: 2rem;
+    }
+    .narrative-text {
+        font-size: 6vw;
+    }
+    .footer-links {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+}
+
