@@ -1,5 +1,6 @@
 # Vorax Gaming
 
+Live 🔗 - https://somensh.github.io/VoraxGaming/
 
 This repository contains the source code for a cinematic, scroll-driven landing page for a fictional game titled "VORAX". The page creates an immersive experience by animating a character sequence as the user scrolls, combined with modern web design techniques and smooth reveal animations.
 
